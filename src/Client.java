@@ -42,19 +42,11 @@ public class Client {
                         break;
                     case "licital":
                         //fogadjuk
-                        System.out.print("Hirdetes ID: ");
-                        String id = input.readLine();
-                        
-                        
-                        System.out.print("Licit osszeg: ");
-                        String osszeg = input.readLine();
-                       
-                        
-                        toServer.println(id);
-                        toServer.println(osszeg);
-                        
-                        String licitSiker =  fromServer.readLine();
-                        System.out.println(licitSiker);
+                        boolean b;
+                        b = LicitBeker(fromServer, toServer);
+                        if(b == false){
+                            System.out.println("Sikertelen licitalas!");
+                        }
                         break;
                     case "kilep": break;
                     default:
@@ -67,6 +59,39 @@ public class Client {
             }
         }while( ! valasz.equalsIgnoreCase("kilep"));
         
+    }
+    
+    
+    private boolean LicitBeker(BufferedReader fromServer, PrintStream toServer){
+        
+        try {        
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+            
+            String hirdetesid = fromServer.readLine();
+            System.out.println(hirdetesid);
+           
+            System.out.print("Hirdetes ID: ");
+            String id = input.readLine();
+            toServer.println(id);
+            
+            String idOK = fromServer.readLine();
+            //System.out.println(idOK);
+            if( ! idOK.equalsIgnoreCase("GOOD") ){
+                return false;
+            }
+            System.out.print("Licit osszeg: ");
+            String osszeg = input.readLine();
+            
+            toServer.println(osszeg);
+
+            String licitSiker =  fromServer.readLine();
+            System.out.println(licitSiker);
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
     
     public void start(){

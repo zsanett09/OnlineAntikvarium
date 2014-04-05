@@ -1,21 +1,15 @@
-public class FelhasznaloController extends Felhasznalo {
+public class FelhasznaloController {
 
-	private HirdetesKezelo hirdetesKezelo;
+    protected Felhasznalo fh;
+    private HirdetesKezelo hirdetesKezelo;
 
     /**
      *
      */
-    public  FelhasznaloController() {
-        
-        // TODO - implement FelhasznaloController.FelhasznaloController
-		
-	}
+    public  FelhasznaloController(Felhasznalo f) {
+       fh = f;
+    }
 
-   
-
-	public <list>LicitesHirdetes ListazastKer() {
-		// TODO - implement FelhasznaloController.ListazastKer
-		throw new UnsupportedOperationException();
-	}
+   //listazas
 
 }

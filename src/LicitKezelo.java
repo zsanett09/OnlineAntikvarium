@@ -4,22 +4,20 @@
 public class LicitKezelo {
         
         private LicitesHirdetes hirdetes;
-        //private HirdetesKezelo hk;
+        
 
 	public LicitKezelo(LicitesHirdetes lh) {
-            
             hirdetes = lh;
 
 	}
 
-	/**
-	 * 
-	 * @param osszeg
-	 */
-	public boolean Licitalas(int osszeg, Felhasznalo v) {
-		
+	public boolean Licitalas(int osszeg, Felhasznalo vevo){
+	
+            if(vevo.getfID() == hirdetes.getTulaj().getfID()){
+                return false;
+            }
             if(osszeg > hirdetes.getAktalisAr()){
-                hirdetes.setUjArUjLicitalo(osszeg, v);
+                hirdetes.setUjArUjLicitalo(osszeg, vevo);
                 return true;
             }
             return false;

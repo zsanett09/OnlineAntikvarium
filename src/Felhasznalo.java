@@ -3,15 +3,18 @@ import java.util.Random;
 
 public class Felhasznalo {
 
-	protected String nev;
-	protected String jelszo;
-	protected String email;
-	protected double ertekeles;
-	protected Cim lakhely;
-	protected Datum szuletes;
-        protected int fID;
+	private String nev;
+	private String jelszo;
+	private String email;
+	private double ertekeles;
+	private Cim lakhely;
+	private Datum szuletes;
+        private int fID;
+        private Antikvarium antik;
         
-        public Felhasznalo(String nev, Cim lakhely, String jelszo, Datum szuletes, String email) {
+        
+        public Felhasznalo(String nev, Cim lakhely, String jelszo, 
+                Datum szuletes, String email, Antikvarium a) {
             this.nev = nev;
             this.lakhely = lakhely;
             this.jelszo = jelszo;
@@ -20,7 +23,7 @@ public class Felhasznalo {
             Random rnd = new Random();
             int id = rnd.nextInt(10000);
             this.fID = id;
-		
+            this.antik = a;
 	}
         public Felhasznalo(){}
         
@@ -63,19 +66,13 @@ public class Felhasznalo {
 	public void setSzuletes(Datum szuletes) {
 		this.szuletes = szuletes;
 	}
-
-
-	
+      
 
 	public Cim getLakhely() {
-		// TODO - implement Felhasznalo.getLakhely
 		return this.lakhely;
 	}
 
-	/**
-	 * 
-	 * @param cim
-	 */
+	
 	public void setLakhely(Cim cim) {
 		// TODO - implement Felhasznalo.setLakhely
 		
@@ -85,11 +82,9 @@ public class Felhasznalo {
             return this;
         }
 
-    /**
-     * @return the fID
-     */
-    public int getfID() {
-        return fID;
-    }
+    
+        public int getfID() {
+            return fID;
+        }
 
 }
