@@ -26,17 +26,17 @@ public class Felhasznalok {
             return null;
         }
           
-        FelhasznaloController getFelhasznaloC(int ID){
+        public FelhasznaloController getFelhasznaloC(int ID){
             Felhasznalo f = keresIDalapjan(ID);
             FelhasznaloController fc = new FelhasznaloController(f);
             return fc;
         }
-        VevoController getVevoC(int ID){
+        public VevoController getVevoC(int ID){
             Felhasznalo f = keresIDalapjan(ID);
             VevoController vc = new VevoController(f);
             return vc;
         }
-        EladoController getEladoC(int ID){
+        public EladoController getEladoC(int ID){
             Felhasznalo f = keresIDalapjan(ID);
             EladoController ec = new EladoController(f);
             return ec;

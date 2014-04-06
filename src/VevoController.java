@@ -1,8 +1,5 @@
 public class VevoController extends FelhasznaloController {
 
-	//private LicitKezelo licitKezelo;
-        
-        
         public VevoController(Felhasznalo f){
             super(f);
          

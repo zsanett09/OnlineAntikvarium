@@ -25,7 +25,7 @@ public class Felhasznalo {
             this.fID = id;
             this.antik = a;
 	}
-        public Felhasznalo(){}
+       
         
 	public String getNev() {
 		return this.nev;
@@ -64,7 +64,7 @@ public class Felhasznalo {
 	}
 
 	public void setSzuletes(Datum szuletes) {
-		this.szuletes = szuletes;
+		this.szuletes.setDatum(szuletes);
 	}
       
 
@@ -74,7 +74,7 @@ public class Felhasznalo {
 
 	
 	public void setLakhely(Cim cim) {
-		// TODO - implement Felhasznalo.setLakhely
+		lakhely.setCim(cim);
 		
 	}
         
@@ -85,6 +85,10 @@ public class Felhasznalo {
     
         public int getfID() {
             return fID;
+        }
+
+        public Antikvarium getAntik() {
+            return antik;
         }
 
 }

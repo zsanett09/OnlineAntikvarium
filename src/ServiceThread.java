@@ -113,8 +113,12 @@ public class ServiceThread extends Thread {
       }
       
       void listazas(BufferedReader fromClient, PrintStream toClient )throws IOException{
-          HirdetesKezelo hk = controller.getAntikvarium().getHirdetesKezelo();
-          ArrayList<LicitesHirdetes> hirdetesekLista = hk.getLicitesHirdetesek();
+          
+            //van 1 felhasznalunk. o tud listazni
+          FelhasznaloController fc = controller.getAntikvarium().getFelhasznalok().getFelhasznaloC(
+             controller.getAntikvarium().getFelhasznalok().getFelhasznalo(0).getfID());
+       
+          ArrayList<LicitesHirdetes> hirdetesekLista = fc.hiretesListazastKer();
           
           for(int i = 0; i < hirdetesekLista.size(); i++){
               LicitesHirdetes lh = hirdetesekLista.get(i);

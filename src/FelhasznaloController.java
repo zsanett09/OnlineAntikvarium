@@ -1,15 +1,17 @@
+import java.util.*;
 public class FelhasznaloController {
 
     protected Felhasznalo fh;
-    private HirdetesKezelo hirdetesKezelo;
-
-    /**
-     *
-     */
+  
     public  FelhasznaloController(Felhasznalo f) {
        fh = f;
     }
 
-   //listazas
+    public ArrayList<LicitesHirdetes> hiretesListazastKer(){
+        ArrayList<LicitesHirdetes> l = 
+                fh.getAntik().getHirdetesKezelo().getLicitesHirdetesek();
+        
+        return l;
+    }
 
 }
