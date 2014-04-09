@@ -1,10 +1,16 @@
+
+import java.util.Date;
+
 public class Konyv {
 
 	private String szerzo;
 	private String cim;
 	private String allapot;
-	private Datum kiadas;
-
+	//private Datum kiadas;
+        private Date kiadas;
+        
+        
+        
 	public String getCim() {
 		return this.cim;
 	}
@@ -13,8 +19,14 @@ public class Konyv {
 		return this.allapot;
 	}
 
-	
-	public  Konyv(String szerzo, String cim, Datum kiadas, String allapot) {
+	/**
+	 * 
+	 * @param szerzo
+	 * @param cim
+	 * @param kiadas
+	 * @param allapot
+	 */
+	public  Konyv(String szerzo, String cim, Date kiadas, String allapot) {
 		this.szerzo = szerzo;
                 this.cim = cim;
                 this.kiadas = kiadas;
@@ -27,9 +39,11 @@ public class Konyv {
 		return this.szerzo;
 	}
 
-	public Datum getKiadas() {
+	public String getKiadasString() {
 		// TODO - implement Konyv.getKiadas
-		return this.kiadas;
+           
+            String s = kiadas.getYear() + "." + kiadas.getMonth() + "." + kiadas.getDay();
+            return s;
 	}
 
 	public Konyv getKonyv() {

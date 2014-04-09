@@ -1,17 +1,21 @@
-import java.util.*;
-public class FelhasznaloController {
+public class FelhasznaloController extends Felhasznalo {
 
-    protected Felhasznalo fh;
-  
-    public  FelhasznaloController(Felhasznalo f) {
-       fh = f;
-    }
+	private HirdetesKezelo hirdetesKezelo;
 
-    public ArrayList<LicitesHirdetes> hiretesListazastKer(){
-        ArrayList<LicitesHirdetes> l = 
-                fh.getAntik().getHirdetesKezelo().getLicitesHirdetesek();
+    /**
+     *
+     */
+    public  FelhasznaloController() {
         
-        return l;
-    }
+        // TODO - implement FelhasznaloController.FelhasznaloController
+		
+	}
+
+   
+
+	public <list>LicitesHirdetes ListazastKer() {
+		// TODO - implement FelhasznaloController.ListazastKer
+		throw new UnsupportedOperationException();
+	}
 
 }

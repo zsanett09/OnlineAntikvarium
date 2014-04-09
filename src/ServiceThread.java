@@ -5,42 +5,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServiceThread extends Thread {
- 
+    
+    //menus fvg
+    //kiiratos fvg
+    
     private Socket client;
+    Antikvarium antikvarium;
     private Controller controller;
     
-    public ServiceThread(Socket client, Antikvarium a){
+    public ServiceThread(Socket client, Antikvarium antikvarium){
         this.client = client;
-        this.controller = new Controller(a);
+        this.antikvarium = antikvarium;
+        controller = new Controller();
     }
     
     @Override
     public void run(){
-        service(client);
+        service(client, antikvarium);
     }
     
       void menu(BufferedReader fromClient, PrintStream toClient) throws IOException{
        String valasz = "";
-       
-       //beegetett vevo
-        Felhasznalo temp = new Felhasznalo("Kezes Csaba", 
-                             new Cim("Veszprem", "Hovirag", "25", "8200"), "12345", 
-                                 new Datum(1990,5,13), "kezscsaba@gmail.com", 
-                                    controller.getAntikvarium());
-        controller.getAntikvarium().getFelhasznalok().addFelhasznalo(temp);
-        
-        //beegetett tulaj
-        Felhasznalo temp2 = new Felhasznalo("Tulaj Aladar", 
-                             new Cim("Veszprem", "Hovirag", "50", "8200"), "54321", 
-                                 new Datum(1991,3,23), "aladar@gmail.com", 
-                                    controller.getAntikvarium());
-        controller.getAntikvarium().getFelhasznalok().addFelhasznalo(temp2);
-        
-        //beegetett hirdetesunk
-        LicitesHirdetes lc = new LicitesHirdetes( 
-                new Konyv("George R. R. Martin", "Tronok harca", 
-                  new Datum(2012,10,2), "Hibatlan allapot"), 100,200,300, temp2);
-        controller.getAntikvarium().getHirdetesKezelo().addLicitesHirdetes(lc);
         
         do{
             toClient.println("Menu");
@@ -56,89 +41,79 @@ public class ServiceThread extends Thread {
             switch(valasz){
                 case "listaz":
                     listazas(fromClient, toClient);
-                    
+                    System.out.println("Valami");
                     break;
                 case "licital": 
-                    // csak h ne keljen listazni ott-ideiglenes
-                    toClient.println(lc.gethirdetesID());
                     
-                    licitalas(fromClient, toClient);
- 
+                    controller.ujVevoCont(new Felhasznalo("Kezes Csaba", 
+                             new Cim("Veszprem", "Hovirag", "25", "8200"), "12345", 
+                                 new Date(1990,5,13), "kezscsaba@gmail.com"));
+                    String id = fromClient.readLine();
+                    int intID = Integer.parseInt(id);
+                    
+                    String osszeg = fromClient.readLine();
+                    
+                    int intOsszeg = 0;
+                    if(osszeg.equalsIgnoreCase("LL")){
+                        LicitesHirdetes lh = antikvarium.getHirdetesKezelo().keresIDalapjan(intID);
+                        intOsszeg = Integer.parseInt(osszeg);
+                        intOsszeg += lh.getLicitLepcso();
+                    }else{
+                        intOsszeg = Integer.parseInt(osszeg);
+                    }
+                    boolean b = licitalas(fromClient, toClient, intID, intOsszeg);
+                    if(b == true){
+                        toClient.println("Sikeres licitalas!");
+                    }else{
+                        toClient.println("Nem siekrult a licitalas!");
+                    }
                     break;
                 case "kilep": break;
                 default:
+                    //toClient.println("Rosz parancsot irtal be!");
                     break;
             }
             
         }while( ! valasz.equalsIgnoreCase("kilep"));
-        
+        //toClient.println("vege");
             
     }
   
-     public void  licitalas(BufferedReader fromClient, PrintStream toClient)
+      boolean licitalas(BufferedReader fromClient, PrintStream toClient, int id, int osszeg )
               throws IOException{
-                          
-            boolean b;
-            Felhasznalok fhk = controller.getAntikvarium().getFelhasznalok();
-
-            VevoController licitalo = fhk.getVevoC(fhk.getFelhasznalo(0).getfID()); 
-            // van 1 vevonk mostmar a felhasznalonkbol
-
-            //id bekeres
-            String id = fromClient.readLine();
-            int intID = Integer.parseInt(id);
-
-            HirdetesKezelo hk = controller.getAntikvarium().getHirdetesKezelo();
-            LicitesHirdetes licitalandoHirdetes =  null;
-            licitalandoHirdetes = hk.keresIDalapjan(intID);
-
-  
-            if(licitalandoHirdetes == null){
-                toClient.println("BAD");
-            }else{
-                 toClient.println("GOOD");
-            
-                //licit osszeg bekeres
-                String osszeg = fromClient.readLine();
-                int intOsszeg = Integer.parseInt(osszeg);
-
-                b = licitalo.Licitalas(licitalandoHirdetes, intOsszeg);
-
-                if(b == true){
-                    toClient.println("Sikeres licitalas!");
-                }else{
-                    toClient.println("Nem siekrult a licitalas!");
-                }
-            } 
+          
+          boolean b = controller.Licitalas(antikvarium.getHirdetesKezelo().keresIDalapjan(id), osszeg);
+          return b;
+          //licitlepcso
       }
       
       void listazas(BufferedReader fromClient, PrintStream toClient )throws IOException{
-          
-            //van 1 felhasznalunk. o tud listazni
-          FelhasznaloController fc = controller.getAntikvarium().getFelhasznalok().getFelhasznaloC(
-             controller.getAntikvarium().getFelhasznalok().getFelhasznalo(0).getfID());
-       
-          ArrayList<LicitesHirdetes> hirdetesekLista = fc.hiretesListazastKer();
+          HirdetesKezelo hk = antikvarium.getHirdetesKezelo();
+          ArrayList<LicitesHirdetes> hirdetesekLista = hk.getLicitesHirdetesek();
           
           for(int i = 0; i < hirdetesekLista.size(); i++){
               LicitesHirdetes lh = hirdetesekLista.get(i);
-                  toClient.println("Hirdetes ID: " + lh.gethirdetesID());
-                  toClient.println(lh.getKonyv().getSzerz());
-                  toClient.println(lh.getKonyv().getCim());
-                  toClient.println(lh.getKonyv().getAllapot());
-                  toClient.println(lh.getKonyv().getKiadas().getDatum());
-                  toClient.println("Minimal ar: " + lh.getMinimalAr());
-                  toClient.println("Kikialltasi ar: " + lh.getKikialtasiAr());
-                  toClient.println("Aktualis ar: " + lh.getAktalisAr());
-                  toClient.println("Licit lepcso: " + lh.getLicitLepcso()); 
-          } 
+             // toClient.println(lh.getMinimalAr());
+
+              toClient.println("Hirdetes ID: " + lh.getID());
+              toClient.println(lh.getKonyv().getSzerz());
+              toClient.println(lh.getKonyv().getCim());
+              toClient.println(lh.getKonyv().getAllapot());
+              toClient.println(lh.getKonyv().getKiadasString());
+              toClient.println("Minimal ar: " + lh.getMinimalAr());
+              toClient.println("Kikialltasi ar: " + lh.getKikialtasiAr());
+              toClient.println("Aktualis ar: " + lh.getAktalisAr());
+              toClient.println("Licit lepcso: " + lh.getLicitLepcso());
+              
+          }
+          
       }
       
       
     
-    private void service(Socket client){
+    private void service(Socket client, Antikvarium antikvarium){
          BufferedReader fromClient;
-         
+         controller = new Controller();
         try {
             fromClient = new BufferedReader(
                     new InputStreamReader(client.getInputStream()));
@@ -149,6 +124,8 @@ public class ServiceThread extends Thread {
             toClient.println("Kiszolgalas!");
             
             menu(fromClient, toClient);
+           
+            //kliens hivogatja a controllert
             
             fromClient.close();
             toClient.close();

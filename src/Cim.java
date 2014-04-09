@@ -5,14 +5,6 @@ public class Cim {
 	private String hazszam;
 	private String isz;
 
-        public Cim(String telepules, String utca, String hazszam, String isz) {
-            this.telepules = telepules;
-            this.utca = utca;
-            this.hazszam = hazszam;
-            this.isz = isz;
-		
-	}
-
 	public String getTelepules() {
 		return this.telepules;
 	}
@@ -45,19 +37,30 @@ public class Cim {
 		this.isz = isz;
 	}
 
+	/**
+	 * 
+	 * @param telepules
+	 * @param utca
+	 * @param hazszam
+	 * @param isz
+	 */
+	public Cim(String telepules, String utca, String hazszam, String isz) {
+		// TODO - implement Cim.Cim
+		
+	}
 
-
-	
+	/**
+	 * 
+	 * @param c
+	 */
 	public void setCim(Cim c) {
-            this.telepules = c.telepules;
-            this.utca = c.utca;
-            this.hazszam = c.hazszam;
-            this.isz = c.isz;
+		// TODO - implement Cim.setCim
 		
 	}
 
 	public Cim getCim() {
-            return this;
+		// TODO - implement Cim.getCim
+            return null;
 	}
 
 }

@@ -1,20 +1,18 @@
 
 import java.util.Random;
+import java.util.*;
 
 public class Felhasznalo {
 
-	private String nev;
-	private String jelszo;
-	private String email;
-	private double ertekeles;
-	private Cim lakhely;
-	private Datum szuletes;
-        private int fID;
-        private Antikvarium antik;
+	protected String nev;
+	protected String jelszo;
+	protected String email;
+	protected double ertekeles;
+	protected Cim lakhely;
+	protected Date szuletes;
+        protected int fID;
         
-        
-        public Felhasznalo(String nev, Cim lakhely, String jelszo, 
-                Datum szuletes, String email, Antikvarium a) {
+        public Felhasznalo(String nev, Cim lakhely, String jelszo, Date szuletes, String email) {
             this.nev = nev;
             this.lakhely = lakhely;
             this.jelszo = jelszo;
@@ -23,9 +21,9 @@ public class Felhasznalo {
             Random rnd = new Random();
             int id = rnd.nextInt(10000);
             this.fID = id;
-            this.antik = a;
+		
 	}
-       
+        public Felhasznalo(){}
         
 	public String getNev() {
 		return this.nev;
@@ -59,22 +57,31 @@ public class Felhasznalo {
 		this.ertekeles = ertekeles;
 	}
 
-	public Datum getSzuletes() {
+	public Date getSzuletes() {
 		return this.szuletes;
 	}
 
-	public void setSzuletes(Datum szuletes) {
-		this.szuletes.setDatum(szuletes);
+	public void setSzuletes(Date szuletes) {
+		this.szuletes = szuletes;
 	}
-      
+
+        public String getSzuletesString(){
+            String s = szuletes.getYear() + "." + szuletes.getMonth() + "." + szuletes.getDay();
+            return s; 
+        }
+	
 
 	public Cim getLakhely() {
+		// TODO - implement Felhasznalo.getLakhely
 		return this.lakhely;
 	}
 
-	
+	/**
+	 * 
+	 * @param cim
+	 */
 	public void setLakhely(Cim cim) {
-		lakhely.setCim(cim);
+		// TODO - implement Felhasznalo.setLakhely
 		
 	}
         
@@ -82,13 +89,11 @@ public class Felhasznalo {
             return this;
         }
 
-    
-        public int getfID() {
-            return fID;
-        }
-
-        public Antikvarium getAntik() {
-            return antik;
-        }
+    /**
+     * @return the fID
+     */
+    public int getfID() {
+        return fID;
+    }
 
 }

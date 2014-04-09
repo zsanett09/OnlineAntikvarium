@@ -1,9 +1,9 @@
 public class EladoController extends FelhasznaloController {
 
-        public EladoController(Felhasznalo f){
-            super(f);
-        }
+	private HirdetesKezelo hirdetesKezelo;
+
+	
         
-        
-        //hirdetes feladas
+        public EladoController(){}
+
 }
