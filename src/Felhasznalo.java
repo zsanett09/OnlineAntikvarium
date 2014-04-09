@@ -1,18 +1,20 @@
 
-import java.util.Random;
 import java.util.*;
 
 public class Felhasznalo {
 
-	protected String nev;
-	protected String jelszo;
-	protected String email;
-	protected double ertekeles;
-	protected Cim lakhely;
-	protected Date szuletes;
-        protected int fID;
+	private String nev;
+	private String jelszo;
+	private String email;
+	private double ertekeles;
+	private Cim lakhely;
+	private Date szuletes;
+        private int fID;
+        private Antikvarium antik;
         
-        public Felhasznalo(String nev, Cim lakhely, String jelszo, Date szuletes, String email) {
+        
+        public Felhasznalo(String nev, Cim lakhely, String jelszo, 
+                Date szuletes, String email, Antikvarium a) {
             this.nev = nev;
             this.lakhely = lakhely;
             this.jelszo = jelszo;
@@ -21,9 +23,9 @@ public class Felhasznalo {
             Random rnd = new Random();
             int id = rnd.nextInt(10000);
             this.fID = id;
-		
+            this.antik = a;
 	}
-        public Felhasznalo(){}
+       
         
 	public String getNev() {
 		return this.nev;
@@ -64,24 +66,15 @@ public class Felhasznalo {
 	public void setSzuletes(Date szuletes) {
 		this.szuletes = szuletes;
 	}
-
-        public String getSzuletesString(){
-            String s = szuletes.getYear() + "." + szuletes.getMonth() + "." + szuletes.getDay();
-            return s; 
-        }
-	
+      
 
 	public Cim getLakhely() {
-		// TODO - implement Felhasznalo.getLakhely
 		return this.lakhely;
 	}
 
-	/**
-	 * 
-	 * @param cim
-	 */
+	
 	public void setLakhely(Cim cim) {
-		// TODO - implement Felhasznalo.setLakhely
+		lakhely.setCim(cim);
 		
 	}
         
@@ -89,11 +82,13 @@ public class Felhasznalo {
             return this;
         }
 
-    /**
-     * @return the fID
-     */
-    public int getfID() {
-        return fID;
-    }
+    
+        public int getfID() {
+            return fID;
+        }
+
+        public Antikvarium getAntik() {
+            return antik;
+        }
 
 }

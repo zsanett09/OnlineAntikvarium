@@ -20,10 +20,14 @@ public class HirdetesKezelo {
             
             for(int i = 0; i < licitesHirdetesek.size(); i++){
                 LicitesHirdetes h = licitesHirdetesek.get(i);
-                if(h.getID() == ID )
+                if(h.gethirdetesID() == ID )
                     return licitesHirdetesek.get(i);
             }
             return null;
+        }
+       
+        public LicitesHirdetes getHirdetes(int i){
+            return licitesHirdetesek.get(i);
         }
 
 }

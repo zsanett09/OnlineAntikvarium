@@ -5,19 +5,12 @@ public class Datum {
 	private int ho;
 	private int nap;
 
-	/**
-	 * 
-	 * @param ev
-	 * @param ho
-	 * @param nap
-	 */
+	
 	public Datum(int ev, int ho, int nap) {
-            
             this.ev = ev;
             this.ho = ho;
             this.nap = nap;
-            
-		
+
 	}
 
 	public String getDatum() {
@@ -25,12 +18,12 @@ public class Datum {
             return s;
 	}
 
-	/**
-	 * 
-	 * @param datum
-	 */
-	public void setDatum(Datum datum) {
-		// TODO - implement Datum.setDatum
+	
+	public void setDatum(Datum d) {
+		// TODO - ellenorizni a számokat
+            this.ev = d.ev;
+            this.ho = d.ho;
+            this.nap = d.nap;
 	}
 
 }

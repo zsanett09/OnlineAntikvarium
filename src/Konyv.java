@@ -1,16 +1,11 @@
-
-import java.util.Date;
-
+import java.util.*;
 public class Konyv {
 
 	private String szerzo;
 	private String cim;
 	private String allapot;
-	//private Datum kiadas;
-        private Date kiadas;
-        
-        
-        
+	private Date kiadas;
+
 	public String getCim() {
 		return this.cim;
 	}
@@ -35,19 +30,19 @@ public class Konyv {
 	}
 
 	public String getSzerz() {
-		// TODO - implement Konyv.getSzerz
+		
 		return this.szerzo;
 	}
 
-	public String getKiadasString() {
-		// TODO - implement Konyv.getKiadas
-           
+	public String getKiadasS() {
             String s = kiadas.getYear() + "." + kiadas.getMonth() + "." + kiadas.getDay();
             return s;
 	}
+        
+      
 
 	public Konyv getKonyv() {
-		// TODO - implement Konyv.getKonyv
+		
 		return this;
 	}
 
