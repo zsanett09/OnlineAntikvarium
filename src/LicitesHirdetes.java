@@ -1,5 +1,5 @@
 
-import java.util.Random;
+import java.util.*;
 
 public class LicitesHirdetes {
 
@@ -11,6 +11,7 @@ public class LicitesHirdetes {
 	private Felhasznalo utolsoErvenyesLicitalo;
         private int hirdetesID;
         private Felhasznalo tulaj;
+        private ArrayList<Licit> licitek;
         
         public  LicitesHirdetes(Konyv konyv, int minimalAr, int licitLepcso, 
                 int kikialtasiAr, Felhasznalo tulaj) {
@@ -23,6 +24,7 @@ public class LicitesHirdetes {
             int id = rnd.nextInt(10000);
             this.hirdetesID = id;
             this.tulaj = tulaj;
+            licitek = new ArrayList<Licit>();
 	}
 
         public Felhasznalo getTulaj(){
@@ -67,8 +69,11 @@ public class LicitesHirdetes {
 		
 	}
 
-	
-
+	public boolean addLicit(Licit uj){
+            licitek.add(uj);
+            return true;
+        }
+        
 	
 
    
