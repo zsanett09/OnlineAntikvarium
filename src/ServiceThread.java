@@ -22,6 +22,7 @@ public class ServiceThread extends Thread {
       void menu(BufferedReader fromClient, PrintStream toClient) throws IOException{
        String valasz = "";
        
+       //ez a git kikészit
        //beegetett vevo
         Felhasznalo temp = new Felhasznalo("Kezes Csaba", 
                              new Cim("Veszprem", "Hovirag", "25", "8200"), "12345", 
