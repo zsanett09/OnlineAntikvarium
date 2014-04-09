@@ -13,13 +13,7 @@ public class Konyv {
 		return this.allapot;
 	}
 
-	/**
-	 * 
-	 * @param szerzo
-	 * @param cim
-	 * @param kiadas
-	 * @param allapot
-	 */
+	
 	public  Konyv(String szerzo, String cim, Datum kiadas, String allapot) {
 		this.szerzo = szerzo;
                 this.cim = cim;
