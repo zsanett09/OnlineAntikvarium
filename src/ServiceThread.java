@@ -42,6 +42,11 @@ public class ServiceThread extends Thread {
                 new Konyv("George R. R. Martin", "Tronok harca", 
                   new Date(2012,10,2), "Hibatlan allapot"), 100,200,300, temp2);
         controller.getAntikvarium().getHirdetesKezelo().addLicitesHirdetes(lc);
+       
+        LicitesHirdetes lc2 = new LicitesHirdetes( 
+                new Konyv("George R. R. Martin", "Kiralyok csataja", 
+                  new Date(2013,1,15), "Hibatlan allapot"), 100,200,300, temp2);
+        controller.getAntikvarium().getHirdetesKezelo().addLicitesHirdetes(lc2);
         
         do{
             toClient.println("Menu");
